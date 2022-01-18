@@ -1,15 +1,12 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 const links = [
 	{ label: 'Story', href: '/story' },
 	{ label: 'Recipes', href: '/recipes' },
 	{ label: 'About us', href: '/about_us' },
 ]
-interface Props {
-	html?: HTMLHtmlElement
-}
 
 const Appbar = () => {
 	const [darkMode, setdarkMode] = useState<boolean>(true)
