@@ -9,7 +9,7 @@ const links = [
 ]
 
 const Appbar = () => {
-	const [darkMode, setdarkMode] = useState<boolean>(true)
+	const [darkMode, setdarkMode] = useState(true)
 	const router = useRouter()
 
 	const changeDarkMode = () => {
