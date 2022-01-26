@@ -7,20 +7,70 @@ const Story = () => (
 			<h2 className='text-xl font-semibold'>Story</h2>
 
 			<div className='mt-2'>
-				<p className='text-zinc-600 dark:text-zinc-400'>
-					&quot;I confess that when this all started, you were like a picture
-					out of focus to me. And it took time for my eyes to adjust to you, to
-					make sense of you, to really recognize you.&quot;
-				</p>
+				<div class='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5'>
+					<div class='rounded overflow-hidden shadow-lg'>
+						<img class='w-full' src='/images/macos.png' alt='Mountain' />
+						<div class='px-6 py-4'>
+							<div class='font-bold text-xl mb-2'>Mountain</div>
+							<p class='text-gray-700 text-base'>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Voluptatibus quia, Nonea! Maiores et perferendis eaque,
+								exercitationem praesentium nihil.
+							</p>
+						</div>
+						<div class='px-6 pt-4 pb-2'>
+							<span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+								#photography
+							</span>
+							<span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+								#travel
+							</span>
+							<span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+								#winter
+							</span>
+						</div>
+					</div>
+					<div class='rounded overflow-hidden shadow-lg'>
+						<img class='w-full' src='/images/macos.png' alt='River' />
+						<div class='px-6 py-4'>
+							<div class='font-bold text-xl mb-2'>River</div>
+							<p class='text-gray-700 text-base'>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Voluptatibus quia, Nonea! Maiores et perferendis eaque,
+								exercitationem praesentium nihil.
+							</p>
+						</div>
+						<div class='px-6 pt-4 pb-2'>
+							<span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+								#travel
+							</span>
+							<span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+								#summer
+							</span>
+						</div>
+					</div>
 
-				<br />
-
-				<p className='text-sm text-zinc-600 dark:text-zinc-400'>
-					<a href='https://twosentencestories.com/vision' className='underline'>
-						Vision
-					</a>
-					, a two sentence story
-				</p>
+					<div class='rounded overflow-hidden shadow-lg'>
+						<img class='w-full' src='/images/macos.png' alt='Forest' />
+						<div class='px-6 py-4'>
+							<div class='font-bold text-xl mb-2'>Forest</div>
+							<p class='text-gray-700 text-base'>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Voluptatibus quia, Nonea! Maiores et perferendis eaque,
+								exercitationem praesentium nihil.
+							</p>
+						</div>
+						<div class='px-6 pt-4 pb-2'>
+							<span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+								#travel
+							</span>
+							<span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+								#fall
+							</span>
+						</div>
+					</div>
+				</div>
+				<h2>Ab</h2>
 			</div>
 		</Section>
 	</Page>
