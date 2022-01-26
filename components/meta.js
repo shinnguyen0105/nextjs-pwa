@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 const Meta = () => (
 	<Head>
-		<title>Gnews Club</title>
+		<title>Vince Blog</title>
 		<meta charSet='utf-8' />
 		<meta name='mobile-web-app-capable' content='yes' />
 		<meta name='apple-mobile-web-app-capable' content='yes' />
@@ -10,8 +10,8 @@ const Meta = () => (
 			name='apple-mobile-web-app-status-bar-style'
 			content='black-translucent'
 		/>
-		<meta name='apple-mobile-web-app-title' content='Gnews Club' />
-		<meta name='application-name' content='Gnews Club' />
+		<meta name='apple-mobile-web-app-title' content='Vince Blog' />
+		<meta name='application-name' content='Vince Blog' />
 		<meta name='description' content='Bring your own ingredients' />
 		<meta
 			name='theme-color'

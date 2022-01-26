@@ -6,7 +6,7 @@ const Page = ({ title, children }) => (
 	<>
 		{title ? (
 			<Head>
-				<title>Gnews Club | {title}</title>
+				<title>Vince Blog | {title}</title>
 			</Head>
 		) : null}
 
