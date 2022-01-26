@@ -2,7 +2,7 @@ How to install and run project:
 
 ```sh
 install node and npm
-cd *YOURPROJECTDIR*
+cd nextjs-pwa
 npm i
 npm run dev
 ```
