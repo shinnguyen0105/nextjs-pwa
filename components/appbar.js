@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 
 const links = [
 	{ label: 'Story', href: '/story' },
@@ -9,24 +8,7 @@ const links = [
 ]
 
 const Appbar = () => {
-	const [darkMode, setdarkMode] = useState(true)
 	const router = useRouter()
-
-	const changeDarkMode = () => {
-		setdarkMode(!darkMode)
-	}
-	const remove = () => {
-		return document.querySelector('html')?.classList.remove('dark')
-	}
-	const add = () => {
-		return document.querySelector('html')?.classList.add('dark')
-	}
-
-	useEffect(() => {
-		return () => {
-			darkMode ? add() : remove()
-		}
-	}, [darkMode])
 
 	return (
 		<div className='pt-safe w-full bg-zinc-900 fixed top-0 left-0'>
@@ -59,16 +41,6 @@ const Appbar = () => {
 										htmlFor='toogleA'
 										className='flex items-center cursor-pointer'
 									>
-										<div className='relative'>
-											<input
-												id='toogleA'
-												type='checkbox'
-												className='sr-only'
-												onClick={() => changeDarkMode()}
-											/>
-											<div className='w-10 h-4 bg-gray-400 rounded-full shadow-inner'></div>
-											<div className='dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition'></div>
-										</div>
 									</label>
 								</div>
 							</div>
