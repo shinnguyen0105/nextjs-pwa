@@ -4,7 +4,6 @@ import Section from '../../components/section'
 import { useRouter } from 'next/router'
 
 const Story = ({ story }) => {
-	console.log('id: ' + story)
 	return (
 		<Page>
 			<Section>

@@ -1,8 +1,9 @@
 import Page from '../components/page'
 import Section from '../components/section'
 
-const AboutUs = () => (
-	<Page>
+const AboutUs = () => {
+	return (
+	<Page title={'About us'}>
 		<Section>
 			<h2 className='text-xl font-semibold'>About us</h2>
 
@@ -24,6 +25,7 @@ const AboutUs = () => (
 			</div>
 		</Section>
 	</Page>
-)
+	)
+}
 
 export default AboutUs
