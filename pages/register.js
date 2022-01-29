@@ -54,6 +54,10 @@ const Register = () => {
 			})
 			.finally(() => {
 				setLoading(false)
+				setLoading(false)
+				enqueueSnackbar('Login successfully!', {
+					variant: 'success',
+				})
 			})
 	}
 
@@ -76,15 +80,38 @@ const Register = () => {
 			)
 		} else {
 			try {
-				await createUserWithEmailAndPassword(auth, accountValues.email, accountValues.password);
-                Router.push('/')
+				await createUserWithEmailAndPassword(
+					auth,
+					accountValues.email,
+					accountValues.password
+				)
+					.then((res) => {
+						console.log(res.user)
+					})
+					.catch((err) => {
+						setError(`Error: ${err.code}`)
+						enqueueSnackbar(
+							'Your register attempt was not successful. Please try again!' +
+								`Error: ${err.code}`,
+							{
+								variant: 'error',
+							}
+						)
+					})
+					.finally(() => {
+						setLoading(false)
+						enqueueSnackbar('Register successfully!', {
+							variant: 'success',
+						})
+						Router.push('/')
+					})
 			} catch (error) {
 				console.log(error)
 			}
 		}
 	}
 
-    if (currentUser.currentUser.email) {
+	if (currentUser.currentUser.email) {
 		Router.push('/')
 	}
 

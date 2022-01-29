@@ -1,4 +1,8 @@
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'
+import {
+	GoogleAuthProvider,
+	signInWithPopup,
+	signInWithEmailAndPassword,
+} from 'firebase/auth'
 import { useState } from 'react'
 import Page from '../components/page'
 import Section from '../components/section'
@@ -9,7 +13,7 @@ import Link from 'next/link'
 import { useStore } from '../store'
 
 const Login = () => {
-	const currentUser = useStore(state => state.currentUser)
+	const currentUser = useStore((state) => state.currentUser)
 	const [error, setError] = useState('')
 	const [loading, setLoading] = useState(false)
 	const { enqueueSnackbar } = useSnackbar()
@@ -28,11 +32,30 @@ const Login = () => {
 
 	const handleSignInWithEmailAndPassword = async () => {
 		try {
-			await signInWithEmailAndPassword(auth, accountValues.email, accountValues.password);
-			enqueueSnackbar('Login successfully!', {
-				variant: 'success',
-			});
-			Router.push('/')
+			await signInWithEmailAndPassword(
+				auth,
+				accountValues.email,
+				accountValues.password
+			)
+				.then((res) => {
+					console.log('login successfully')
+				})
+				.catch((err) => {
+					setError(`Error: ${err.code}`)
+					enqueueSnackbar(
+						'Your login attempt was not successful. Please try again!' +
+							`Error: ${err.code}`,
+						{
+							variant: 'error',
+						}
+					)
+				})
+				.finally(() => {
+					enqueueSnackbar('Login successfully!', {
+						variant: 'success',
+					})
+					Router.push('/')
+				})
 		} catch (error) {
 			console.log(error)
 			enqueueSnackbar('Incorrect email or password. Please try again!', {
@@ -44,26 +67,35 @@ const Login = () => {
 	const handleSignInWithGoogle = async (provider) => {
 		try {
 			await signInWithPopup(auth, provider)
-			.then((res) => {
-				console.log(res.user)
-			})
-			.catch((err) => {
-				setError(`Error: ${err.code}`)
-			})
-			.finally(() => {
-				setLoading(false)
-			})
-			enqueueSnackbar('Login successfully!', {
-				variant: 'success',
-			});
-		Router.push('/')
+				.then((res) => {
+					console.log(res.user)
+				})
+				.catch((err) => {
+					setError(`Error: ${err.code}`)
+					enqueueSnackbar(
+						'Your login attempt was not successful. Please try again!' +
+							`Error: ${err.code}`,
+						{
+							variant: 'error',
+						}
+					)
+				})
+				.finally(() => {
+					setLoading(false)
+					enqueueSnackbar('Login successfully!', {
+						variant: 'success',
+					})
+					Router.push('/')
+				})
 		} catch (error) {
 			console.log(error)
-			enqueueSnackbar('Your login attempt was not successful. Please try again!', {
-				variant: 'error',
-			})
+			enqueueSnackbar(
+				'Your login attempt was not successful. Please try again!',
+				{
+					variant: 'error',
+				}
+			)
 		}
-		
 	}
 	if (currentUser.email) {
 		Router.push('/')
@@ -121,7 +153,8 @@ const Login = () => {
 									className='bg-gray-700 text-gray-100 p-4 w-full rounded-full tracking-wide
                                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                                 shadow-lg'
-								onClick={handleSignInWithEmailAndPassword}>
+									onClick={handleSignInWithEmailAndPassword}
+								>
 									Log in
 								</button>
 							</div>
@@ -130,7 +163,9 @@ const Login = () => {
 									className='bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
                                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                                 shadow-lg'
-									onClick={() => handleSignInWithGoogle(new GoogleAuthProvider())}
+									onClick={() =>
+										handleSignInWithGoogle(new GoogleAuthProvider())
+									}
 								>
 									Log in with Google
 								</button>
