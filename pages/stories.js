@@ -10,7 +10,7 @@ const Story = () => (
 			<div className='mt-2'>
 				<div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5'>
 					{stories.map((story) => (
-						<Link href='/story/[sid]' as={`story/${story.id}`}>
+						<Link key={story.id} href='/story/[sid]' as={`story/${story.id}`}>
 							<div key={story.id} className='rounded overflow-hidden shadow-lg'>
 								<img className='w-full' src={story.image} alt='Mountain' />
 								<div className='px-6 py-4'>
