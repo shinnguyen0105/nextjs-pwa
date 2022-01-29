@@ -1,6 +1,6 @@
 import Page from '../components/page'
 import Section from '../components/section'
-import Link from 'next/link';
+import Link from 'next/link'
 
 const Story = () => (
 	<Page>
@@ -10,30 +10,30 @@ const Story = () => (
 			<div className='mt-2'>
 				<div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5'>
 					{stories.map((story) => (
-						<div key={story.id} className='rounded overflow-hidden shadow-lg'>
-						<img className='w-full' src={story.image} alt='Mountain' />
-						<div className='px-6 py-4'>
-							<Link href='/story/[sid]' as={`story/${story.id}`}>
-								<div className='font-bold text-xl mb-2'>{story.title}</div>
-							</Link>
-							<p className='text-gray-700 text-base'>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Voluptatibus quia, Nonea! Maiores et perferendis eaque,
-								exercitationem praesentium nihil.
-							</p>
-						</div>
-						<div className='px-6 pt-4 pb-2'>
-							<span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-								#photography
-							</span>
-							<span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-								#travel
-							</span>
-							<span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-								#winter
-							</span>
-						</div>
-					</div>
+						<Link href='/story/[sid]' as={`story/${story.id}`}>
+							<div key={story.id} className='rounded overflow-hidden shadow-lg'>
+								<img className='w-full' src={story.image} alt='Mountain' />
+								<div className='px-6 py-4'>
+									<div className='font-bold text-xl mb-2'>{story.title}</div>
+									<p className='text-gray-700 text-base'>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+										Voluptatibus quia, Nonea! Maiores et perferendis eaque,
+										exercitationem praesentium nihil.
+									</p>
+								</div>
+								<div className='px-6 pt-4 pb-2'>
+									<span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+										#photography
+									</span>
+									<span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+										#travel
+									</span>
+									<span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+										#winter
+									</span>
+								</div>
+							</div>
+						</Link>
 					))}
 				</div>
 				<h2>ahihi</h2>
@@ -46,22 +46,22 @@ export default Story
 
 const stories = [
 	{
-		id: "1",
+		id: '1',
 		image: '/images/1.jpg',
 		title: '[Tết Nguyên Đán - Tết cổ truyền của dân tộc Việt Nam]',
 		content:
 			'🧧Trải qua bao mùa quất nhưng chắc hẳn nhiều bạn vẫn chưa biết tại sao dân ta lại gọi là Tết Nguyên Đán hay là Tết Nhâm Dần phải không nào? Cùng GNews tìm hiểu nhé! \n#GNewsClub2022',
 	},
 	{
-		id: "2",
+		id: '2',
 		image: '/images/ios.png',
 		title: '[Tết Nguyên Đán - Tết cổ truyền của dân tộc Việt Nam]',
 		content:
 			'🧧Trải qua bao mùa quất nhưng chắc hẳn nhiều bạn vẫn chưa biết tại sao dân ta lại gọi là Tết Nguyên Đán hay là Tết Nhâm Dần phải không nào? Cùng GNews tìm hiểu nhé! \n#GNewsClub2022',
 	},
 	{
-		id: "3",
-		image: '/images/macos.png',
+		id: '3',
+		image: '/images/1.jpg',
 		title: '[Tết Nguyên Đán - Tết cổ truyền của dân tộc Việt Nam]',
 		content:
 			'🧧Trải qua bao mùa quất nhưng chắc hẳn nhiều bạn vẫn chưa biết tại sao dân ta lại gọi là Tết Nguyên Đán hay là Tết Nhâm Dần phải không nào? Cùng GNews tìm hiểu nhé! \n#GNewsClub2022',

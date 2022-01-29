@@ -1,8 +1,5 @@
-import { useEffect } from 'react'
 import Page from '../components/page'
 import Section from '../components/section'
-import { useAuth, useFirebaseAuth } from '../shared/firebaseAuthContext'
-import { useStore } from '../store'
 
 const Index = () => {
 return (

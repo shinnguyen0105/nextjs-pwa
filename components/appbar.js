@@ -17,19 +17,17 @@ const Appbar = () => {
 	const currentUser = useStore((state) => state.currentUser)
 	const handleLogOut = () => {
 		try {
-			signOut(auth);
-			setLogIn(false);
-		} catch(e) {
-			console.log(e);
+			signOut(auth)
+			setLogIn(false)
+		} catch (e) {
+			console.log(e)
 		}
-
 	}
 	useEffect(() => {
 		if (currentUser.id != '') {
 			setLogIn(true)
 		}
-		
-	}, [currentUser.id]);
+	}, [currentUser.id])
 
 	return (
 		<div className='pt-safe w-full bg-zinc-900 fixed top-0 left-0'>
@@ -67,22 +65,30 @@ const Appbar = () => {
 						</div>
 						{isLoggedIn ? (
 							<>
-								<div
+								{/* <div
 									title='Gluten Free'
 									className='w-10 h-10 bg-zinc-200 dark:bg-zinc-800 bg-cover bg-center rounded-full shadow-inner'
 									style={{
 										backgroundImage:
 											'url(https://images.unsplash.com/photo-1612480797665-c96d261eae09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)',
 									}}
-								/>
-								<button class='btn btn-blue' onClick={handleLogOut}>
+								/> */}
+								<button className='btn btn-blue'>
+									{!currentUser.username ? currentUser.email : currentUser.username}
+								</button>
+								<button className='btn btn-blue' onClick={handleLogOut}>
 									Logout
 								</button>
 							</>
 						) : (
-							<Link href='/login'>
-								<button class='btn btn-blue'>Login</button>
-							</Link>
+							<>
+								<Link href='/login'>
+									<button className='btn btn-blue'>Login</button>
+								</Link>
+								<Link href='/register'>
+									<button className='btn btn-blue'>Register</button>
+								</Link>
+							</>
 						)}
 					</nav>
 				</div>
