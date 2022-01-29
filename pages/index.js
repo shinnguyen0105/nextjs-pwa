@@ -1,7 +1,11 @@
+import { useEffect } from 'react'
 import Page from '../components/page'
 import Section from '../components/section'
+import { useAuth, useFirebaseAuth } from '../shared/firebaseAuthContext'
+import { useStore } from '../store'
 
-const Index = () => (
+const Index = () => {
+return (
 	<Page>
 		<Section>
 			<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
@@ -31,6 +35,6 @@ const Index = () => (
 			</div>
 		</Section>
 	</Page>
-)
+)}
 
 export default Index

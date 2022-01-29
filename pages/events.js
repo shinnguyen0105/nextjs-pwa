@@ -1,7 +1,14 @@
 import Page from '../components/page'
 import Section from '../components/section'
+import { useStore } from '../store';
+import Router from 'next/router';
+import { useEffect } from 'react';
 
 const Recipes = () => {
+	const currentUser = useStore();
+	useEffect(() => {
+		if (currentUser.currentUser.uid === '') Router.push('/login');
+	  }, []);
 	return (
 		<Page>
 			<Section>
