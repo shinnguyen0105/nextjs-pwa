@@ -1,5 +1,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useStore } from '../store'
+import { signOut } from 'firebase/auth'
+import { auth } from '../shared/firebase'
+import { useEffect, useState } from 'react'
 
 const links = [
 	{ label: 'Stories', href: '/stories' },
@@ -9,6 +13,23 @@ const links = [
 
 const Appbar = () => {
 	const router = useRouter()
+	const [isLoggedIn, setLogIn] = useState(false)
+	const currentUser = useStore((state) => state.currentUser)
+	const handleLogOut = () => {
+		try {
+			signOut(auth);
+			setLogIn(false);
+		} catch(e) {
+			console.log(e);
+		}
+
+	}
+	useEffect(() => {
+		if (currentUser.id != '') {
+			setLogIn(true)
+		}
+		
+	}, [currentUser.id]);
 
 	return (
 		<div className='pt-safe w-full bg-zinc-900 fixed top-0 left-0'>
@@ -40,20 +61,29 @@ const Appbar = () => {
 									<label
 										htmlFor='toogleA'
 										className='flex items-center cursor-pointer'
-									>
-									</label>
+									></label>
 								</div>
 							</div>
 						</div>
-
-						<div
-							title='Gluten Free'
-							className='w-10 h-10 bg-zinc-200 dark:bg-zinc-800 bg-cover bg-center rounded-full shadow-inner'
-							style={{
-								backgroundImage:
-									'url(https://images.unsplash.com/photo-1612480797665-c96d261eae09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)',
-							}}
-						/>
+						{isLoggedIn ? (
+							<>
+								<div
+									title='Gluten Free'
+									className='w-10 h-10 bg-zinc-200 dark:bg-zinc-800 bg-cover bg-center rounded-full shadow-inner'
+									style={{
+										backgroundImage:
+											'url(https://images.unsplash.com/photo-1612480797665-c96d261eae09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)',
+									}}
+								/>
+								<button class='btn btn-blue' onClick={handleLogOut}>
+									Logout
+								</button>
+							</>
+						) : (
+							<Link href='/login'>
+								<button class='btn btn-blue'>Login</button>
+							</Link>
+						)}
 					</nav>
 				</div>
 			</header>

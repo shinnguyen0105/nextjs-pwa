@@ -23,14 +23,19 @@ const App = ({ Component, pageProps }) => {
 			// console.log(user.displayName)
 			// console.log(JSON.stringify(user));
 		  } else {
-			currentUser.setCurrentUser(null);
+			console.log('user is null')
+			currentUser.setCurrentUser({
+				id: '',
+				username: '',
+				email: '',
+			});
 			// localStorage.removeItem('userInfo')
 		  }
 		});
 	  }, []);
 
 	  useEffect(() => {
-		if (currentUser.currentUser.uid !== '') Router.push('/login');
+		if (currentUser.currentUser.id !== '') Router.push('/login');
 	  }, []);
 	return (
 		// <FirebaseAuthProvider>

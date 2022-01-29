@@ -5,10 +5,6 @@ import Router from 'next/router';
 import { useEffect } from 'react';
 
 const Recipes = () => {
-	const currentUser = useStore();
-	useEffect(() => {
-		if (currentUser.currentUser.uid === '') Router.push('/login');
-	  }, []);
 	return (
 		<Page>
 			<Section>
