@@ -15,6 +15,7 @@ const Appbar = () => {
 	const router = useRouter()
 	const [isLoggedIn, setLogIn] = useState(false)
 	const currentUser = useStore((state) => state.currentUser)
+	const [displayName, setDisplayName] = useState('');
 	const handleLogOut = () => {
 		try {
 			signOut(auth)
@@ -26,6 +27,11 @@ const Appbar = () => {
 	useEffect(() => {
 		if (currentUser.id != '') {
 			setLogIn(true)
+			if (currentUser.username) {
+				setDisplayName(currentUser.username.split(' ')[0]);
+			} else {
+				setDisplayName(currentUser.email.split('@')[0])
+			}
 		}
 	}, [currentUser.id])
 
@@ -65,16 +71,16 @@ const Appbar = () => {
 						</div>
 						{isLoggedIn ? (
 							<>
-								{/* <div
+								<div
 									title='Gluten Free'
 									className='w-10 h-10 bg-zinc-200 dark:bg-zinc-800 bg-cover bg-center rounded-full shadow-inner'
 									style={{
 										backgroundImage:
-											'url(https://images.unsplash.com/photo-1612480797665-c96d261eae09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)',
+										currentUser.photoURL ? `url(${currentUser.photoURL})` : 'url(https://images.unsplash.com/photo-1612480797665-c96d261eae09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)',
 									}}
-								/> */}
+								/>
 								<button className='btn btn-blue'>
-									{!currentUser.username ? currentUser.email : currentUser.username}
+									Hi {displayName}!
 								</button>
 								<button className='btn btn-blue' onClick={handleLogOut}>
 									Logout

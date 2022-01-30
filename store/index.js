@@ -4,6 +4,7 @@ const currentUser = {
       id: '',
       username: '',
       email: '',
+      photoURL: ''
   };
 
 export const useStore = create((set) => ({

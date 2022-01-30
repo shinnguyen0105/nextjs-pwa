@@ -2,6 +2,7 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 	createUserWithEmailAndPassword,
+    sendEmailVerification
 } from 'firebase/auth'
 import { useState } from 'react'
 import { useSnackbar } from 'notistack'
@@ -46,7 +47,8 @@ const Register = () => {
 	const handleSignIn = (provider) => {
 		signInWithPopup(auth, provider)
 			.then((res) => {
-				console.log(res.user)
+				//console.log(res.user)
+                sendEmailVerification(res.user);
 			})
 			.catch((err) => {
 				setError(`Error: ${err.code}`)

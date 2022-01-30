@@ -17,8 +17,9 @@ const App = ({ Component, pageProps }) => {
 					id: user.uid,
 					username: user.displayName,
 					email: user.email,
+					photoURL: user.photoURL,
 				})
-				// localStorage.setItem('userInfo', JSON.stringify(user))
+				//localStorage.setItem('userInfo', JSON.stringify(user))
 				// console.log(user.displayName)
 				// console.log(JSON.stringify(user));
 			} else {
@@ -26,6 +27,7 @@ const App = ({ Component, pageProps }) => {
 					id: '',
 					username: '',
 					email: '',
+					photoURL: '',
 				})
 				// localStorage.removeItem('userInfo')
 			}

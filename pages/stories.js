@@ -36,7 +36,6 @@ const Story = () => (
 						</Link>
 					))}
 				</div>
-				<h2>ahihi</h2>
 			</div>
 		</Section>
 	</Page>

@@ -130,12 +130,14 @@ const Login = () => {
 										Password
 									</div>
 									<div>
+										<Link href='/reset_password'>
 										<a
 											className='text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
-                                        cursor-pointer'
-										>
+											cursor-pointer'
+											>
 											Forgot Password?
 										</a>
+											</Link>
 									</div>
 								</div>
 								<input
