@@ -2,7 +2,7 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 	createUserWithEmailAndPassword,
-    sendEmailVerification
+	sendEmailVerification,
 } from 'firebase/auth'
 import { useState } from 'react'
 import { useSnackbar } from 'notistack'
@@ -17,7 +17,6 @@ import Link from 'next/link'
 const Register = () => {
 	const currentUser = useStore()
 
-	const [error, setError] = useState('')
 	const [loading, setLoading] = useState(false)
 	const { enqueueSnackbar } = useSnackbar()
 
@@ -44,42 +43,54 @@ const Register = () => {
 		})
 	}
 
-	const handleSignIn = (provider) => {
-		signInWithPopup(auth, provider)
+	const handleSignIn = async (provider) => {
+		setLoading(true)
+		await signInWithPopup(auth, provider)
 			.then((res) => {
 				//console.log(res.user)
-                sendEmailVerification(res.user);
+				if (res.user) {
+					sendEmailVerification(res.user)
+					enqueueSnackbar('Register successfully!', {
+						variant: 'success',
+					})
+					Router.push('/')
+				}
 			})
 			.catch((err) => {
-				setError(`Error: ${err.code}`)
-				enqueueSnackbar(error, { variant: 'error' })
+				enqueueSnackbar(
+					'Your login attempt was not successful. Please try again!' +
+						` Error: ${err.code}`,
+					{
+						variant: 'error',
+					}
+				)
 			})
 			.finally(() => {
+				// console.log('login successfully')
+				// nothing to do
 				setLoading(false)
-				setLoading(false)
-				enqueueSnackbar('Login successfully!', {
-					variant: 'success',
-				})
 			})
 	}
 
 	const handleSignUp = async () => {
+		setLoading(true)
 		if (!accountValues.password || !accountValues.email) {
 			enqueueSnackbar('Do not leave password or email field blank', {
 				variant: 'error',
 			})
-		}
-		if (!passwordCheck.test(accountValues.password)) {
+			setLoading(false)
+		} else if (!passwordCheck.test(accountValues.password)) {
 			enqueueSnackbar(
 				'Password must have at least 8 characters (Including:> = 1 special character,> = 1 digit,> = 1 uppercase letter)',
 				{ variant: 'error' }
 			)
-		}
-		if (accountValues.password !== reTypePassword.rePassword) {
+			setLoading(false)
+		} else if (accountValues.password !== reTypePassword.rePassword) {
 			enqueueSnackbar(
 				'Password and Re-enter password do not match! Please try again',
 				{ variant: 'error' }
 			)
+			setLoading(false)
 		} else {
 			try {
 				await createUserWithEmailAndPassword(
@@ -88,10 +99,15 @@ const Register = () => {
 					accountValues.password
 				)
 					.then((res) => {
-						console.log(res.user)
+						//console.log(res.user)
+						if (res.user) {
+							enqueueSnackbar('Register successfully!', {
+								variant: 'success',
+							})
+							Router.push('/')
+						}
 					})
 					.catch((err) => {
-						setError(`Error: ${err.code}`)
 						enqueueSnackbar(
 							'Your register attempt was not successful. Please try again!' +
 								`Error: ${err.code}`,
@@ -101,14 +117,19 @@ const Register = () => {
 						)
 					})
 					.finally(() => {
+						// console.log('login successfully')
+						// nothing to do
 						setLoading(false)
-						enqueueSnackbar('Register successfully!', {
-							variant: 'success',
-						})
-						Router.push('/')
 					})
 			} catch (error) {
 				console.log(error)
+				enqueueSnackbar(
+					'Your register attempt was not successful. Please try again!' +
+						`Error: ${error.code}`,
+					{
+						variant: 'error',
+					}
+				)
 			}
 		}
 	}
@@ -178,6 +199,7 @@ const Register = () => {
                                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                                 shadow-lg'
 									onClick={handleSignUp}
+									disabled={loading}
 								>
 									Register
 								</button>
@@ -188,6 +210,7 @@ const Register = () => {
                                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                                 shadow-lg'
 									onClick={() => handleSignIn(new GoogleAuthProvider())}
+									disabled={loading}
 								>
 									Log in with Google
 								</button>

@@ -14,7 +14,6 @@ import { useStore } from '../store'
 
 const Login = () => {
 	const currentUser = useStore((state) => state.currentUser)
-	const [error, setError] = useState('')
 	const [loading, setLoading] = useState(false)
 	const { enqueueSnackbar } = useSnackbar()
 
@@ -31,6 +30,7 @@ const Login = () => {
 	}
 
 	const handleSignInWithEmailAndPassword = async () => {
+		setLoading(true);
 		try {
 			await signInWithEmailAndPassword(
 				auth,
@@ -38,59 +38,71 @@ const Login = () => {
 				accountValues.password
 			)
 				.then((res) => {
-					console.log('login successfully')
+					if (res.user) {
+						enqueueSnackbar('Login successfully!', {
+							variant: 'success',
+						})
+						Router.push('/')
+					}
 				})
 				.catch((err) => {
-					setError(`Error: ${err.code}`)
 					enqueueSnackbar(
 						'Your login attempt was not successful. Please try again!' +
-							`Error: ${err.code}`,
+							` Error: ${err.code}`,
 						{
 							variant: 'error',
 						}
 					)
 				})
 				.finally(() => {
-					enqueueSnackbar('Login successfully!', {
-						variant: 'success',
-					})
-					Router.push('/')
-				})
-		} catch (error) {
-			console.log(error)
-			enqueueSnackbar('Incorrect email or password. Please try again!', {
-				variant: 'error',
-			})
-		}
-	}
-
-	const handleSignInWithGoogle = async (provider) => {
-		try {
-			await signInWithPopup(auth, provider)
-				.then((res) => {
-					console.log(res.user)
-				})
-				.catch((err) => {
-					setError(`Error: ${err.code}`)
-					enqueueSnackbar(
-						'Your login attempt was not successful. Please try again!' +
-							`Error: ${err.code}`,
-						{
-							variant: 'error',
-						}
-					)
-				})
-				.finally(() => {
+					// console.log('login successfully')
+					// nothing to do
 					setLoading(false)
-					enqueueSnackbar('Login successfully!', {
-						variant: 'success',
-					})
-					Router.push('/')
 				})
 		} catch (error) {
 			console.log(error)
 			enqueueSnackbar(
-				'Your login attempt was not successful. Please try again!',
+				'Your login attempt was not successful. Please try again!' +
+					` Error: ${error.code}`,
+				{
+					variant: 'error',
+				}
+			)
+		}
+	}
+
+	const handleSignInWithGoogle = async (provider) => {
+		setLoading(true)
+		try {
+			await signInWithPopup(auth, provider)
+				.then((res) => {
+					//console.log(res.user)
+					if (res.user) {
+						enqueueSnackbar('Login successfully!', {
+							variant: 'success',
+						})
+						Router.push('/')
+					}
+				})
+				.catch((err) => {
+					enqueueSnackbar(
+						'Your login attempt was not successful. Please try again!' +
+							` Error: ${err.code}`,
+						{
+							variant: 'error',
+						}
+					)
+				})
+				.finally(() => {
+					//console.log('login successfully')
+					// nothing to do
+					setLoading(false)
+				})
+		} catch (error) {
+			console.log(error)
+			enqueueSnackbar(
+				'Your login attempt was not successful. Please try again!' +
+					` Error: ${error.code}`,
 				{
 					variant: 'error',
 				}
@@ -156,6 +168,7 @@ const Login = () => {
                                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                                 shadow-lg'
 									onClick={handleSignInWithEmailAndPassword}
+									disabled={loading}
 								>
 									Log in
 								</button>
@@ -168,6 +181,7 @@ const Login = () => {
 									onClick={() =>
 										handleSignInWithGoogle(new GoogleAuthProvider())
 									}
+									disabled={loading}
 								>
 									Log in with Google
 								</button>
