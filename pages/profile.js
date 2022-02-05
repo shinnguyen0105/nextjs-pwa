@@ -32,10 +32,11 @@ const Profile = () => {
 						<div  className='p-4 md:p-12 lg:text-left text-center'>
 							<div
 								 className='block rounded-full shadow-xl mx-auto sm:-mt-18 md:-mt-32 h-48 w-48 bg-cover bg-center'
-								style={{
-									backgroundImage:
-										'url(https://source.unsplash.com/MP0IUfwrn0A)',
-								}}
+                                 style={{
+                                    backgroundImage: currentUser.photoURL
+                                        ? `url(${currentUser.photoURL})`
+                                        : 'url(https://images.unsplash.com/photo-1612480797665-c96d261eae09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)',
+                                }}
 							></div>
 
 							<h1  className='text-3xl font-bold pt-8'>{displayName}</h1>
