@@ -81,19 +81,46 @@ const Appbar = () => {
 									}}
 								/>
 								<Link href='/profile'>
-									<button className='btn btn-blue'>Hi {displayName}!</button>
+									<button
+										className={`text-sm ${
+											router.pathname === '/profile'
+												? 'text-indigo-500 dark:text-indigo-400'
+												: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+										}`}
+									>
+										Hi {displayName}!
+									</button>
 								</Link>
-								<button className='btn btn-blue' onClick={handleLogOut}>
+								<button
+									className='text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+									onClick={handleLogOut}
+								>
 									Logout
 								</button>
 							</>
 						) : (
 							<>
 								<Link href='/login'>
-									<button className='btn btn-blue'>Login</button>
+									<button
+										className={`text-sm ${
+											router.pathname === '/login'
+												? 'text-indigo-500 dark:text-indigo-400'
+												: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+										}`}
+									>
+										Login
+									</button>
 								</Link>
 								<Link href='/register'>
-									<button className='btn btn-blue'>Register</button>
+									<button
+										className={`text-sm ${
+											router.pathname === '/register'
+												? 'text-indigo-500 dark:text-indigo-400'
+												: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+										}`}
+									>
+										Register
+									</button>
 								</Link>
 							</>
 						)}
