@@ -1,54 +1,27 @@
 import Router from 'next/router'
 import { useEffect } from 'react'
 import { ThemeProvider } from 'next-themes'
-import { onAuthStateChanged } from 'firebase/auth'
 import { useStore } from '../store'
-import { auth } from '../shared/firebase'
 import { SnackbarProvider } from 'notistack'
 import Meta from '../components/meta'
 import '../styles/globals.css'
+import { ApolloProvider } from "@apollo/react-hooks";
+import withData from "../utils/apollo";
 
-const App = ({ Component, pageProps }) => {
-	const currentUser = useStore()
-	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				currentUser.setCurrentUser({
-					id: user.uid,
-					username: user.displayName,
-					email: user.email,
-					photoURL: user.photoURL,
-				})
-				//localStorage.setItem('userInfo', JSON.stringify(user))
-				// console.log(user.displayName)
-				// console.log(JSON.stringify(user));
-			} else {
-				currentUser.setCurrentUser({
-					id: '',
-					username: '',
-					email: '',
-					photoURL: '',
-				})
-				// localStorage.removeItem('userInfo')
-			}
-		})
-	}, [])
+const App = ({ Component, pageProps, apollo }) => {
 
-	useEffect(() => {
-		if (currentUser.currentUser.id !== '') Router.push('/login')
-	}, [])
 	return (
-		<SnackbarProvider maxSnack={3}>
+		<ApolloProvider client={apollo}>
 			<ThemeProvider
 				attribute='class'
-				defaultTheme='system'
+				defaultTheme='light'
 				disableTransitionOnChange
 			>
 				<Meta />
 				<Component {...pageProps} />
 			</ThemeProvider>
-		</SnackbarProvider>
+		</ApolloProvider>
 	)
 }
 
-export default App
+export default withData(App);

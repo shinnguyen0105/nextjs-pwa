@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 const Meta = () => (
 	<Head>
-		<title>Vince Blog</title>
+		<title>GNews Club</title>
 		<meta charSet='utf-8' />
 		<meta name='mobile-web-app-capable' content='yes' />
 		<meta name='apple-mobile-web-app-capable' content='yes' />
@@ -17,11 +17,6 @@ const Meta = () => (
 			name='theme-color'
 			content='#f4f4f5'
 			media='(prefers-color-scheme: light)'
-		/>
-		<meta
-			name='theme-color'
-			content='#18181b'
-			media='(prefers-color-scheme: dark)'
 		/>
 		<meta
 			name='viewport'

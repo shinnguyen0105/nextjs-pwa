@@ -6,7 +6,7 @@ const Page = ({ title, children }) => (
 	<>
 		{title ? (
 			<Head>
-				<title>Vince Blog | {title}</title>
+				<title>GNews Club | {title}</title>
 			</Head>
 		) : null}
 
@@ -17,7 +17,7 @@ const Page = ({ title, children }) => (
 			 * Padding top = `appbar` height
 			 * Padding bottom = `bottom-nav` height
 			 */
-			className='mx-auto px-safe pt-20 pb-16 sm:pb-0 max-w-screen-md'
+			className='mx-auto px-safe pt-20 pb-16 sm:pb-0 max-w-screen-xl'
 		>
 			<div className='p-6'>{children}</div>
 		</main>
