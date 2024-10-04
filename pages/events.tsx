@@ -1,13 +1,10 @@
 import Page from '../components/page'
 import Section from '../components/section'
-import { useStore } from '../store';
-import Router from 'next/router';
-import { useEffect } from 'react';
 
 const Recipes = () => {
 	return (
 		<Page>
-			<Section>
+			<Section key={'recipes-1'}>
 				<h2 className='text-xl font-semibold'>Ingredients</h2>
 
 				<div className='mt-2'>
@@ -18,7 +15,7 @@ const Recipes = () => {
 				</div>
 			</Section>
 
-			<Section>
+			<Section key={'recipes-2'}>
 				<h3 className='font-medium'>Thanks to</h3>
 
 				<ul className='space-y-2 px-6 py-2 list-disc'>

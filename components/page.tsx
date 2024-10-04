@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import Appbar from '../components/appbar'
 import BottomNav from '../components/bottom-nav'
+import { ReactNode } from 'react'
 
-const Page = ({ title, children }) => (
+type PageProps = {
+	title?: string,
+	children: ReactNode
+}
+const Page = ({ title, children }: PageProps) => (
 	<>
 		{title ? (
 			<Head>

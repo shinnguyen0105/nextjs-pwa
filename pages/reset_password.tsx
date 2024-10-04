@@ -1,22 +1,19 @@
 import { sendPasswordResetEmail } from 'firebase/auth'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import Page from '../components/page'
 import Section from '../components/section'
 import { auth } from '../shared/firebase'
 import { useSnackbar } from 'notistack'
 import Router from 'next/router'
-import { useStore } from '../store'
 
 const ResetPassword = () => {
-	const currentUser = useStore((state) => state.currentUser)
-	const [error, setError] = useState('')
 	const { enqueueSnackbar } = useSnackbar()
 
 	const [accountValues, setAccountValues] = useState({
 		email: '',
 	})
 
-	const handleAccountChange = (event) => {
+	const handleAccountChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target
 		setAccountValues((previousState) => {
 			return { ...previousState, [name]: value }
@@ -26,11 +23,13 @@ const ResetPassword = () => {
 	const handleResetPasswordWithEmail = async () => {
 		try {
 			await sendPasswordResetEmail(auth, accountValues.email)
-				.then((res) => {
-					console.log('send the request reset password successfully')
+				.then(() => {
+					console.log('send the request reset password successfully');
+					enqueueSnackbar('Reset successfully!', {
+						variant: 'success',
+					})
 				})
-				.catch((err) => {
-					setError(`Error: ${err.code}`)
+				.catch((err: { code: string }) => {
 					enqueueSnackbar(
 						'Your request was not successful. Please try again!' +
 							`Error: ${err.code}`,
@@ -55,7 +54,7 @@ const ResetPassword = () => {
 
 	return (
 		<Page>
-			<Section>
+			<Section key='reset-pw'>
 				<div className='mt-2'>
 					<div className='sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl lg:shadow-xl md:shadow-xl p-2'>
 						<h2 className='text-center text-4xl text-gray-100 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold'>

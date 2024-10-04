@@ -4,7 +4,7 @@ import Section from '../components/section'
 const AboutUs = () => {
 	return (
 	<Page title={'About us'}>
-		<Section>
+		<Section key={'about-us'}>
 			<h2 className='text-xl font-semibold'>About us</h2>
 
 			<div className='mt-2'>

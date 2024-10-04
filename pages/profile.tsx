@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react'
 import Page from '../components/page'
 import Section from '../components/section'
 import { useStore } from '../store'
-import Router from 'next/router'
 
 const Profile = () => {
     const currentUser = useStore(state => state.currentUser);
 	const [displayName, setDisplayName] = useState('');
-    
+
     useEffect(() => {
         if (currentUser.username) {
             setDisplayName(currentUser.username);
@@ -17,13 +16,13 @@ const Profile = () => {
         // if (currentUser.email === '') {
         //      Router.push('/')
         // }
-          
-        
+
+
     }, [currentUser.email])
 
 	return (
 		<Page>
-			<Section>
+			<Section key='Profile'>
 				<div className='mt-2'>
 					<div
 						id='profile'

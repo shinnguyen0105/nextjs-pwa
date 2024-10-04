@@ -7,41 +7,38 @@ import { auth } from '../shared/firebase'
 import { SnackbarProvider } from 'notistack'
 import Meta from '../components/meta'
 import '../styles/globals.css'
+import type { AppProps } from 'next/app'
 
-const App = ({ Component, pageProps }) => {
+export default function App({ Component, pageProps }: AppProps) {
 	const currentUser = useStore()
 	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, (user: { uid: any; displayName: any; email: any; photoURL: any }) => {
 			if (user) {
 				currentUser.setCurrentUser({
 					id: user.uid,
 					username: user.displayName,
 					email: user.email,
-					photoURL: user.photoURL,
+					photoURL: user.photoURL
 				})
-				//localStorage.setItem('userInfo', JSON.stringify(user))
-				// console.log(user.displayName)
-				// console.log(JSON.stringify(user));
 			} else {
 				currentUser.setCurrentUser({
 					id: '',
 					username: '',
 					email: '',
-					photoURL: '',
+					photoURL: ''
 				})
-				// localStorage.removeItem('userInfo')
 			}
 		})
-	}, [])
+	}, [currentUser])
 
 	useEffect(() => {
 		if (currentUser.currentUser.id !== '') Router.push('/login')
-	}, [])
+	}, [currentUser.currentUser.id])
 	return (
 		<SnackbarProvider maxSnack={3}>
 			<ThemeProvider
-				attribute='class'
-				defaultTheme='system'
+				attribute="class"
+				defaultTheme="system"
 				disableTransitionOnChange
 			>
 				<Meta />
@@ -50,5 +47,3 @@ const App = ({ Component, pageProps }) => {
 		</SnackbarProvider>
 	)
 }
-
-export default App

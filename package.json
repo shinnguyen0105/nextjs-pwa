@@ -12,6 +12,7 @@
 		"@emotion/core": "^11.0.0",
 		"@emotion/react": "^11.7.1",
 		"@emotion/styled": "^11.6.0",
+		"@firebase/auth-types": "^0.12.2",
 		"dotenv": "^14.3.2",
 		"firebase": "^9.6.1",
 		"next": "12.3.4",
@@ -40,5 +41,8 @@
 		"singleQuote": true,
 		"jsxSingleQuote": true,
 		"useTabs": true
+	},
+	"resolutions": {
+		"@types/react": "^17.0.37"
 	}
 }
