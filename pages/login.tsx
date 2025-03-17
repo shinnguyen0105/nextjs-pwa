@@ -115,7 +115,7 @@ const Login = () => {
 
 	return (
 		<Page>
-			<Section>
+			<Section key='login'>
 				<div className='mt-2'>
 					<div className='sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl lg:shadow-xl md:shadow-xl p-2'>
 						<h2 className='text-center text-4xl text-gray-100 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold'>

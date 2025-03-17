@@ -4,7 +4,7 @@ import Section from '../components/section'
 const Index = () => {
 return (
 	<Page>
-		<Section>
+		<Section key='index'>
 			<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
 				We grow a lot of rice.
 			</h2>

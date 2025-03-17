@@ -4,7 +4,7 @@ import {
 	createUserWithEmailAndPassword,
 	sendEmailVerification,
 } from 'firebase/auth'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useSnackbar } from 'notistack'
 import { passwordCheck } from '../utils/regex/index'
 import Page from '../components/page'
@@ -25,7 +25,7 @@ const Register = () => {
 		password: '',
 	})
 
-	const handleAccountChange = (event) => {
+	const handleAccountChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target
 		setAccountValues((previousState) => {
 			return { ...previousState, [name]: value }
@@ -36,7 +36,7 @@ const Register = () => {
 		rePassword: '',
 	})
 
-	const handleReTypePasswordChange = (event) => {
+	const handleReTypePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target
 		setReTypePassword((previousState) => {
 			return { ...previousState, [name]: value }
@@ -140,7 +140,7 @@ const Register = () => {
 
 	return (
 		<Page>
-			<Section>
+			<Section key='Register'>
 				<div className='mt-2'>
 					<div className='sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl lg:shadow-xl md:shadow-xl p-2'>
 						<h2 className='text-center text-4xl text-gray-100 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold'>
